@@ -1,0 +1,17 @@
+name: 'Setup Gradle Microservice Commons'
+description: 'Runs common actions related to the setup of a gradle microservice'
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+    - uses: actions/cache@v2
+      with:
+        path: build-cache
+        key: ${{ runner.os }}-build-cache-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-build-cache-
